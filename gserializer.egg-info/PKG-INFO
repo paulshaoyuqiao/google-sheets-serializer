@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: gserializer
+Version: 1.0.6
+Summary: Retrieve and serialize a google sheet into tabular data object for easier list and array manipulations
+Home-page: https://github.com/paulshaoyuqiao/google-sheets-serializer
+Author: Paul Shao
+Author-email: paulshaoyuqiao1@berkeley.edu
+License: MIT
+Description: ### Google Sheets Serializer
+        ###### Author: Paul Shao
+        a Python library that converts online google sheets into serializable tabular data that can be directly manipulated as Python lists
+        
+        **Version**: beta 1.0.6
+        #### Get Started:
+        If you are using this library the first time, please follow the steps below to ensure you have the required libraries and dependencies installed:
+        1. Go to [Google Developers Link for Sheets API](https://developers.google.com/sheets/api/quickstart/python) and **enable the Google Sheets API** through your developer console (It doesn't matter which language for the API you are enabling it from).
+        2. Download the generated `credentials.json` file
+        3. Use the command `pip show google-sheets-serializer` to determine the location of the installed library
+        4. Go inside the main directory for serializer package, and put the `credentials.json` file there.
+        
+        #### Basic Usages:
+        The serializer mainly makes use of 2 objects, `Reader` and `Filter`. A `Reader` is an object that performs the basic operation of reading in a google sheet given its **spreadsheet ID** and the **name of the sheet**.
+        
+        * To find these two values for a given google sheet, follow the general guidelines below:
+        * For example, if I am currently using a spreadsheet, I should be able to get its ID by looking at the **current link** in my browser:
+        * The link should take the form of
+        ```
+        https://docs.google.com/spreadsheets/d/<spreadsheetId>/edit#...
+        ```
+        Where the placeholder `<spreadsheetId>` is the spreadsheet ID. The name of the sheet refers to the name of the current tab of the sheet that you are working on. That can be found usually at the bottom left of the google sheets application.
+        
+        #### General Methods:
+        Here are some of the methods currently supported by this library:
+        
+        To use the package upon installation, import via:
+        ```import gserializer```
+        The main package comes with 2 functions:
+        1. `create_reader()`: creates a `Reader` object
+        2. `create_filter(reader)`: creates a `Filter` object that takes in `Reader` object initialized with data
+        
+        Methods supported by the 2 classes of objects are specified as below:
+        1. `Reader`
+           1. `read_from_sheet(spreadsheetId, sheetName)`: takes in a spreadsheet ID and sheet name and returns a Reader object
+        2. `Filter`
+           1. Note: **the initialization of a `Filter` object requires a `Reader` object as an input**, and you should generally load the `Reader` object with the sheets data by calling the method `read_from_sheet` before using `Filter` on top of it.
+           2. `num_cols()`: number of columns
+           3. `num_rows()`: number of rows
+           4. `int_values()`: converts all data in the google sheet to be integers if possible
+           5. `float_values()`: converts all data in the google sheet to be floating point numbers if possible
+           6. `col_names()`: a list of all the column names
+           7. `values()`: the data of the google sheet (without the column header)
+           8. `print_formatted()`: prints out all the data in a row-major and aligned order
+           9. `map(f)`: applies the function `f` to all of the data section of the sheet
+           10. `filter(major_order, f, numerical)`: filter the google sheet by the predicate function `f`. Eliminating any row or column that contains **at least 1 value** that doesn't obey the predicate. Here are some more detailed specifications for each of the parameters:
+               1.  `major_order`: can take on values 0 or 1, 0 for row-major, and 1 for column-major
+               2.  `f`: the predicate function, should always return a boolean; by default `f` is set to always return `True` if not specified
+               3.  `numerical`: indicates whether the data needs to be pre-formatted. 0 for leaving it as it is; 1 for converting all data to integers; 2 for converting all data to floating point numbers
+           11. `reduce(major_order, f, numerical)`: reduce the google sheet by accumulating and combining cells using the function `f`. Here are the specifications for each of the parameters:
+               1.  `major_order`: can take on values 0 or 1, 0 for row-major, and 1 for column-major
+               2.  `f`: the combiner function, should take in 2 arguments (representing the values in 2 adjacent cells, either row-major or column-major)
+               3.  `numerical`: indicates whether the data needs to be pre-formatted. 0 for leaving it as it is; 1 for converting all data to integers; 2 for converting all data to floating point numbers
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown

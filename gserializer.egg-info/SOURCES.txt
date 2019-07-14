@@ -1,0 +1,12 @@
+README.md
+setup.py
+gserializer/__init__.py
+gserializer/__main__.py
+gserializer.egg-info/PKG-INFO
+gserializer.egg-info/SOURCES.txt
+gserializer.egg-info/dependency_links.txt
+gserializer.egg-info/requires.txt
+gserializer.egg-info/top_level.txt
+gserializer/Tools/Filter.py
+gserializer/Tools/Reader.py
+gserializer/Tools/__init__.py

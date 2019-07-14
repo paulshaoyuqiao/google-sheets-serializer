@@ -2,7 +2,7 @@
 ###### Author: Paul Shao
 a Python library that converts online google sheets into serializable tabular data that can be directly manipulated as Python lists
 
-**Version**: beta 1.0.0
+**Version**: beta 1.0.6
 #### Get Started:
 If you are using this library the first time, please follow the steps below to ensure you have the required libraries and dependencies installed:
 1. Go to [Google Developers Link for Sheets API](https://developers.google.com/sheets/api/quickstart/python) and **enable the Google Sheets API** through your developer console (It doesn't matter which language for the API you are enabling it from).
@@ -15,7 +15,7 @@ The serializer mainly makes use of 2 objects, `Reader` and `Filter`. A `Reader` 
 
 * To find these two values for a given google sheet, follow the general guidelines below:
 * For example, if I am currently using a spreadsheet, I should be able to get its ID by looking at the **current link** in my browser:
-* The link should take the form of 
+* The link should take the form of
 ```
 https://docs.google.com/spreadsheets/d/<spreadsheetId>/edit#...
 ```
@@ -23,6 +23,14 @@ Where the placeholder `<spreadsheetId>` is the spreadsheet ID. The name of the s
 
 #### General Methods:
 Here are some of the methods currently supported by this library:
+
+To use the package upon installation, import via:
+```import gserializer```
+The main package comes with 2 functions:
+1. `create_reader()`: creates a `Reader` object
+2. `create_filter(reader)`: creates a `Filter` object that takes in `Reader` object initialized with data
+
+Methods supported by the 2 classes of objects are specified as below:
 1. `Reader`
    1. `read_from_sheet(spreadsheetId, sheetName)`: takes in a spreadsheet ID and sheet name and returns a Reader object
 2. `Filter`
