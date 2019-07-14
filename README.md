@@ -1,3 +1,6 @@
+To install for usage: `pip install gserializer`
+To import upon installation: `import gserializer`
+
 ### Google Sheets Serializer
 ###### Author: Paul Shao
 a Python library that converts online google sheets into serializable tabular data that can be directly manipulated as Python lists
